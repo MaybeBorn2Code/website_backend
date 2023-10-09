@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Зарегайся епта</h1>
+        <form method="post">
+            {% if errors %}
+            <div class="alert">
+                <ul>
+                    {% for field_name, field_errors in errors.items %}
+                    {% for error in field_errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div>
+                <button type="submit">Сохранить</button>
+            </div>
+            {% if message %}
+            {{ message }}
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>
